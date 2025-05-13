@@ -1,0 +1,40 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Barra de navegación */
+.navbar {
+    padding: 10px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1000px;
+}
+
+/* Tabla del carrito */
+table {
+    margin-top: 20px;
+}
+
+/* Estilos del menú desplegable */
+.dropdown-menu {
+    background-color: #343a40;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #495057;
+}
+
+/* Pie de página */
+footer {
+    padding: 20px;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
