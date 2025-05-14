@@ -1,11 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #3f87a6, #ebf8e1);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-container {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        width: 350px;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .login-container input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+
+      .login-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #3f87a6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        margin-top: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .login-container button:hover {
+        background-color: #336e87;
+      }
+
+      .register-link {
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+      .register-link a {
+        text-decoration: none;
+        color: #3f87a6;
+        font-weight: bold;
+      }
+
+      .message {
+        color: green;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .message {
+        color: green;
+        text-align: center;
+        margin-bottom: 15px;
+        background-color: white;
+        border-radius: 20px;
+        padding-block: 5px;
+        padding-inline: 10px;
+        opacity: 1;
+        transition: opacity 1s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Iniciar sesión</h2>
+
+      <div
+        id="registroExitoso"
+        class="message"
+        style="
+          display: none;
+          background-color: white;
+          border-radius: 20px;
+          padding-block: 5px;
+          padding-inline: 10px;
+        "
+      >
+        Usuario registrado exitosamente. ¡Por favor, inicia sesión!
+      </div>
+
+      <div
+  id="loginError"
+  class="message"
+  style="display: none; color: red; background-color: white"
+>
+ 
+</div>
+
+      <form id="loginForm" action="login.php" method="POST">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Correo electrónico"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="contraseña"
+          placeholder="Contraseña"
+          required
+        />
+        <button type="submit">Ingresar</button>
+      </form>
+      <div class="register-link">
+        ¿No tienes cuenta? <a href="register.html">Regístrate</a>
+      </div>
+    </div>
+
     
-</body>
+    <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.get("registro") === "exitoso") {
+    const mensaje = document.getElementById("registroExitoso");
+    mensaje.style.display = "block";
+    mensaje.style.position = "absolute";
+    mensaje.style.right = "20px";
+    mensaje.style.top = "20px";
+    setTimeout(() => {
+      mensaje.style.opacity = "0";
+      setTimeout(() => {
+        mensaje.style.display = "none";
+      }, 1000);
+    }, 5000);
+  }
+
+  if (urlParams.has("error")) {
+    const errorDiv = document.getElementById("loginError");
+    const errorMensaje = urlParams.get("error");
+    errorDiv.textContent = decodeURIComponent(errorMensaje);
+    errorDiv.style.display = "block";
+    errorDiv.style.position = "absolute";
+    errorDiv.style.right = "20px";
+    errorDiv.style.top = "20px";
+
+    setTimeout(() => {
+      errorDiv.style.opacity = "0";
+      setTimeout(() => {
+        errorDiv.style.display = "none";
+      }, 1000);
+    }, 5000);
+  }
+</script>
+
+  </body>
 </html>
