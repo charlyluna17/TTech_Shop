@@ -1,0 +1,150 @@
+/* estilos.css */
+.navbar {
+  background-color: grey !important; /* Color amarillo */
+}
+/* ... otros estilos que ya tenías ... */
+
+.form-control {
+  /* Otras propiedades de estilo */
+  width: 400px; /* El ancho actual puede ser diferente */
+}
+
+/* Ejemplo usando el primer selector más específico */
+.nav-item.dropdown > .nav-link.dropdown-toggle > .bi {
+  font-size: 28px; /* Establece el tamaño de la fuente a 28 píxeles (puedes usar otro valor) */
+}
+
+/* Ejemplo usando el selector por ID */
+#categoriasDropdown > .bi {
+  font-size: 1.8em; /* Establece el tamaño de la fuente a 1.8 veces el tamaño de la fuente del enlace */
+}
+
+/* Ejemplo usando el selector más específico */
+.nav-item.p-3 > .btn > .bi {
+  font-size: 30px; /* Establece el tamaño de la fuente a 24 píxeles (puedes usar otro valor) */
+}
+
+/* Estilos para el carrusel */
+#ofertasCarousel {
+    max-width: 600px; /* Establece un ancho máximo para el carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-inner img {
+    max-height: 300px; /* Establece una altura máxima para las imágenes dentro del carrusel */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse, recortando si es necesario */
+}
+
+/* Media queries para hacerlo responsive */
+@media (max-width: 768px) { /* Para pantallas medianas (tablets) y más pequeñas */
+    #ofertasCarousel {
+        max-width: 90%; /* El carrusel ocupa un mayor porcentaje del ancho en pantallas más pequeñas */
+    }
+    .carousel-inner img {
+        max-height: 200px; /* Reduce la altura en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 576px) { /* Para pantallas pequeñas (móviles) */
+    .carousel-inner img {
+        max-height: 150px; /* Reduce aún más la altura en pantallas pequeñas */
+    }
+}
+
+/* Estilos generales para el cuerpo de la página (opcional, si no los tienes ya) */
+body {
+    font-family: Arial, sans-serif; /* Fuente base, ajusta si tienes otra */
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Estilos para las tarjetas de producto */
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    overflow: hidden; /* Asegura que nada se salga del borde redondeado */
+    text-align: center;
+    padding: 1rem;
+    height: 100%; /* Asegura que todas las tarjetas en una fila tengan la misma altura */
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en columna */
+    justify-content: space-between; /* Empuja el botón al final y el título/precio arriba */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave para efectos hover */
+}
+
+/* Efecto al pasar el mouse sobre la tarjeta */
+.product-card:hover {
+    transform: translateY(-5px); /* Desplaza la tarjeta ligeramente hacia arriba */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Añade una sombra sutil */
+}
+
+/* Estilos para la imagen del producto dentro de la tarjeta */
+.product-card img {
+    max-height: 180px; /* Altura máxima para las imágenes del producto */
+    object-fit: contain; /* Ajusta la imagen dentro de su contenedor sin recortar */
+    margin-bottom: 1rem; /* Espacio debajo de la imagen */
+    width: 100%; /* Asegura que la imagen ocupe el ancho disponible */
+}
+
+/* Estilos para el nombre del producto */
+.product-card .product-name {
+    font-size: 1.25rem; /* Tamaño de fuente del nombre */
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Espacio debajo del nombre */
+    color: #333; /* Color del texto */
+}
+
+/* Estilos para el precio del producto */
+.product-card .product-price {
+    color: #dc3545; /* Color rojo de Bootstrap para el precio */
+    font-size: 1.5rem; /* Tamaño de fuente más grande para el precio */
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Espacio debajo del precio */
+}
+
+/* Estilos para la categoría (badge) */
+.product-card .product-category {
+    background-color: #6c757d; /* Color gris de Bootstrap */
+    color: white;
+    padding: 0.25rem 0.75rem; /* Relleno interno */
+    border-radius: 0.25rem; /* Bordes ligeramente redondeados */
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+    display: inline-block; /* Para que ocupe solo el ancho de su contenido */
+    margin-top: 0.5rem; /* Espacio arriba de la categoría */
+    text-transform: capitalize; /* Convierte la primera letra en mayúscula */
+    margin-bottom: 1rem; /* Espacio debajo de la categoría antes del botón */
+}
+
+/* Estilos para el cuerpo de la tarjeta (para flexbox) */
+.product-card .card-body {
+    flex-grow: 1; /* Permite que el cuerpo de la tarjeta crezca y empuje el footer (si lo hubiera) hacia abajo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente si es necesario */
+}
+
+/* Estilos para el botón "Ver detalles" */
+.product-card .btn {
+    width: 100%; /* El botón ocupa todo el ancho de la tarjeta */
+}
+
+/* Estilos de la barra de navegación (asegúrate de que coincidan con tu HTML) */
+#logohome {
+    padding: 0.5rem 1rem; /* Ajusta el padding para el logo si es necesario */
+}
+
+/* Pequeñas adaptaciones para pantallas más pequeñas si lo necesitas */
+@media (max-width: 768px) {
+    .product-card {
+        padding: 0.75rem; /* Menos padding en pantallas pequeñas */
+    }
+    .product-card img {
+        max-height: 150px; /* Imágenes un poco más pequeñas */
+    }
+    .product-card .product-name {
+        font-size: 1.1rem;
+    }
+    .product-card .product-price {
+        font-size: 1.3rem;
+    }
+}
