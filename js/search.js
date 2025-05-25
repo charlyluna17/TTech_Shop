@@ -82,13 +82,23 @@ function displaySearchResults(resultados) {
         <section class="container my-5">
             <h2 class="mb-4">Resultados de búsqueda</h2>
             <div class="row g-4" id="search-results">
-                ${resultados.map(producto => `
+                ${resultados.map(producto => {
+                    // Construir ruta de imagen correctamente
+                    let imagenPath = producto.imagenes[0];
+                    
+                    // Si la imagen no incluye la ruta base, agregarla
+                    if (!imagenPath.includes('img/productos/')) {
+                        imagenPath = `img/productos/${imagenPath}`;
+                    }
+                    
+                    return `
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="card h-100 border-0 shadow-sm">
-                            <img src="img/productos/${producto.imagenes[0]}" 
+                            <img src="${imagenPath}" 
                                  class="card-img-top p-3" 
                                  alt="${producto.nombre}"
-                                 style="height: 180px; object-fit: contain;">
+                                 style="height: 180px; object-fit: contain;"
+                                 onerror="this.src='img/placeholder.jpg'">
                             <div class="card-body">
                                 <h5 class="card-title">${producto.nombre}</h5>
                                 <p class="text-danger fw-bold">$${producto.precio.toFixed(2)}</p>
@@ -99,7 +109,8 @@ function displaySearchResults(resultados) {
                             </div>
                         </div>
                     </div>
-                `).join('')}
+                    `;
+                }).join('')}
             </div>
         </section>
     `;

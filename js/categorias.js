@@ -1,4 +1,3 @@
-// categorias.js - Versión corregida
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar que los productos están disponibles
     if (!window.productos || window.productos.length === 0) {
@@ -10,49 +9,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoria = getCategoriaFromUrl();
     
     if (!categoria) {
-        window.location.href = "home.html";
+        showError("Categoría no especificada");
         return;
     }
 
-    // Normalizar nombres de categoría
-    const categoriaNormalizada = categoria.toLowerCase().trim();
-    
-    // Mapeo de nombres de categoría para coincidir con el dropdown
-    const categoriasMap = {
-        'telefonos': 'telefonos',
-        'audio': 'audio',
-        'perifericos': 'perifericos',
-        'computadoras': 'computadoras',
-        'consolas': 'consolas'
-    };
-
-    const categoriaReal = categoriasMap[categoriaNormalizada];
-    
-    if (!categoriaReal) {
-        showError("Categoría no válida");
-        return;
-    }
-
-    // Mostrar título
-    const categoriasNombres = {
-        telefonos: "Teléfonos",
-        audio: "Audio y Video",
-        perifericos: "Periféricos",
-        computadoras: "Computadoras",
-        consolas: "Consolas"
+    // Mostrar título de categoría
+    const categoriaTitulos = {
+        'telefonos': 'Teléfonos',
+        'audio': 'Audio y Video',
+        'perifericos': 'Periféricos',
+        'computadoras': 'Computadoras',
+        'consolas': 'Consolas'
     };
     
-    document.getElementById('categoria-titulo').textContent = categoriasNombres[categoriaReal] || categoriaReal;
+    document.getElementById('categoria-titulo').textContent = categoriaTitulos[categoria] || categoria;
     
-    // Filtrar productos
+    // Filtrar productos por categoría
     const productosFiltrados = window.productos.filter(p => 
-        p.categoria && p.categoria.toLowerCase() === categoriaReal
+        p.categoria && p.categoria.toLowerCase() === categoria.toLowerCase()
     );
 
-    showProducts(productosFiltrados);
+    mostrarProductos(productosFiltrados);
 });
 
-function showProducts(productos) {
+function mostrarProductos(productos) {
     const container = document.getElementById('productos-categoria');
     const emptyMsg = document.getElementById('sin-productos');
     
@@ -62,13 +42,24 @@ function showProducts(productos) {
         return;
     }
 
-    container.innerHTML = productos.map(producto => `
+    container.innerHTML = productos.map(producto => {
+        // Manejo de imágenes como en search.js
+        let imagenPrincipal = producto.imagenes && producto.imagenes.length > 0 ? 
+            producto.imagenes[0] : 'img/placeholder.jpg';
+        
+        // Asegurar que la ruta sea correcta
+        if (!imagenPrincipal.includes('img/productos/')) {
+            imagenPrincipal = `img/productos/${imagenPrincipal}`;
+        }
+
+        return `
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="card h-100 border-0 shadow-sm">
-                <img src="img/productos/${producto.imagenes[0]}" 
+                <img src="${imagenPrincipal}" 
                      class="card-img-top p-3" 
                      alt="${producto.nombre}" 
-                     style="height: 200px; object-fit: contain;">
+                     style="height: 200px; object-fit: contain;"
+                     onerror="this.src='img/placeholder.jpg'">
                 <div class="card-body">
                     <h5 class="card-title">${producto.nombre}</h5>
                     <p class="text-danger fw-bold">$${producto.precio.toFixed(2)}</p>
@@ -82,11 +73,13 @@ function showProducts(productos) {
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
     
     emptyMsg.style.display = 'none';
 }
 
+// Resto de las funciones permanecen igual...
 function showError(message) {
     document.getElementById('productos-categoria').innerHTML = '';
     document.getElementById('sin-productos').innerHTML = `
